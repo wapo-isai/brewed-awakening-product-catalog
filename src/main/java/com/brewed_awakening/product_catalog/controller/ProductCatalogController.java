@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product-catalog/")
+@RequestMapping("/product-catalog/")
 public class ProductCatalogController {
     private final ProductItemRepository productItemRepository;
 
@@ -33,5 +33,10 @@ public class ProductCatalogController {
     @GetMapping("/{productId}")
     public ProductItem getProduct(@PathVariable("productId") long productId){
         return productItemRepository.findById(productId);
+    }
+
+    @GetMapping("/products")
+    public List<ProductItem> getProductsByIds(@RequestParam List<Long> ids) {
+        return productItemRepository.findAllById(ids);
     }
 }
